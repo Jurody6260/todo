@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:todo_1/functs/funcs.dart';
 
 class Home extends StatefulWidget {
@@ -29,16 +28,11 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: NeumorphicTheme.baseColor(context),
-      appBar: NeumorphicAppBar(
+      appBar: AppBar(
         centerTitle: true,
-        title: NeumorphicText(
+        title: Text(
           'My Todo',
-          style: NeumorphicStyle(
-            depth: 7, //customize depth here
-            color: Colors.black, //customize color here
-          ),
-          textStyle: NeumorphicTextStyle(
+          style: TextStyle(
             fontSize: 18, //customize size here
             // AND others usual text style properties (fontFamily, fontWeight, ...)
           ),
@@ -53,14 +47,10 @@ class _HomeState extends State<Home> {
               child: ListTile(
                 title: Text(todoList[index]),
                 tileColor: Colors.white10,
-                trailing: NeumorphicButton(
-                  child: NeumorphicIcon(
+                trailing: TextButton(
+                  child: Icon(
                     Icons.remove_circle_outline,
                     size: 25,
-                    style: NeumorphicStyle(depth: 19, color: Colors.black),
-                  ),
-                  style: NeumorphicStyle(
-                    depth: 18,
                   ),
                   onPressed: () {
                     setState(() {
@@ -80,35 +70,34 @@ class _HomeState extends State<Home> {
           );
         },
       ),
-      floatingActionButton: NeumorphicFloatingActionButton(
+      floatingActionButton: FloatingActionButton(
         onPressed: () {
           showDialog(
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
                     title: Text('Нужно сделать...'),
-                    content: Neumorphic(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          border: UnderlineInputBorder(
-                            borderSide: BorderSide(
+                    content: (TextField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
                               color: Colors.white,
-                            ),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                          ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                          ),
+                              width: 2.5,
+                              style: BorderStyle.solid),
                         ),
-                        onChanged: (String value) {
-                          _userToDo = value;
-                        },
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
                       ),
-                    ),
+                      onChanged: (String value) {
+                        _userToDo = value;
+                      },
+                    )),
                     actions: [
-                      NeumorphicButton(
+                      TextButton(
                           onPressed: () {
                             setState(() {
                               todoList.add(_userToDo);
@@ -120,10 +109,9 @@ class _HomeState extends State<Home> {
                     ]);
               });
         },
-        child: NeumorphicIcon(
+        child: Icon(
           Icons.add_circle,
           size: 50,
-          style: NeumorphicStyle(depth: 3),
         ),
       ),
     );
